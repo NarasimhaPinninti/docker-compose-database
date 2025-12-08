@@ -1,12 +1,5 @@
-FROM maven:3.9.6-eclipse-temurin-17
-
-WORKDIR /app
-
-COPY pom.xml .
-RUN mvn dependency:go-offline
-
-COPY src ./src
-
-RUN mvn package -DskipTests
-
-CMD ["java","-jar","target/springdemo-1.0.jar"]
+FROM eclipse-temurin:17-jre
+COPY target/springdemo-1.0.jar /usr/app/springdemo-1.0.jar
+WORKDIR /usr/app/
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","springdemo-1.0.jar"]
