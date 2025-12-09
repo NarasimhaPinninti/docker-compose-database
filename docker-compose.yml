@@ -11,7 +11,7 @@ services:
       - "3306:3306"
 
   app:
-    build: .
+    image: narasimha1247/narasimha
     container_name: spring-app
     depends_on:
       - mysql
