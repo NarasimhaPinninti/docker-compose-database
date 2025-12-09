@@ -3,17 +3,23 @@ services:
   mysql:
     image: mysql:8
     container_name: mysql-db
-    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: testdb
     ports:
       - "3306:3306"
+    networks:
+      - spring-network
 
   app:
-    image: narasimha1247/narasimha
+    image: narasimha1247/narasimha:latest
     container_name: spring-app
-    depends_on:
-      - mysql
     ports:
       - "8080:8080"
+    depends_on:
+      - mysql
+    networks:
+      - spring-network
+
+networks:
+  spring-network:
